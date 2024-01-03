@@ -1,0 +1,9 @@
+kaggle
+matplotlib
+numpy
+openai
+pandas
+python-dotenv
+scikit-learn
+tenacity
+torch
