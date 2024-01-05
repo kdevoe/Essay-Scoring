@@ -9,3 +9,4 @@ venv.bak/
 
 # Other
 .DS_Store
+constants.py
