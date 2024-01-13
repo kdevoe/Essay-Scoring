@@ -4,6 +4,7 @@ numpy
 openai
 pandas
 python-dotenv
+seaborn
 scikit-learn
 tenacity
 torch
