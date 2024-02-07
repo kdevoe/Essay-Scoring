@@ -10,8 +10,8 @@ Each category is scored from 1 to 5 on 0.5 level increments.
 
 In this study two main approaches were compared:
 
-* Fine-Tuning: A small, pre-trained model of 86M parameters (DebertaV3) was fine-tuned to evaluate the essays.
-* Prompt Engineering: Using both ChatGPT 3.5 and 4 the model was prompted to score the given essays.
+* **Fine-Tuning:** A small, pre-trained model of 86M parameters (DebertaV3) was fine-tuned to evaluate the essays.
+* **Prompt Engineering:** Using both ChatGPT 3.5 and 4 the model was prompted to score the given essays.
 
 Below are key results from the study.
 
