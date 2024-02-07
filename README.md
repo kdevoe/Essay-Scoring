@@ -42,16 +42,31 @@ Training and Validation results from this run show very little overfitting and a
 
 <img width="399" alt="Screenshot 2024-01-12 at 7 24 59 PM" src="https://github.com/kdevoe/Essay-Scoring/assets/31428365/7d67207e-fa97-4b4c-b863-23c49285f90b">
 
-Final performance was evaluated on the holdout test set. The model was able to achieve a strong correlation between actual and predicted scores. These results are compared with ChatGPT prompting below.
+### Fine-Tuning Results
+Final performance was evaluated on the holdout test set. The model was able to achieve a strong correlation between actual and predicted scores. An RMSE value of 0.50 on the test set outperforms any of the GPT model variations (shown below).
 
 <img width="376" alt="Screenshot 2024-01-12 at 7 45 27 PM" src="https://github.com/kdevoe/Essay-Scoring/assets/31428365/fe9beab2-339b-4d8a-9b2a-198bb7424639">
 
 ## Prompting (GPT-3.5, GPT-4)
 
-Another approach that was evaluated was using existing API's for OpenAI's GPT-3.5 and GPT-4 models (gpt-3.5-turbo-11-6 and gpt-4-1106-preview). Models were prompted to evaluate the given essays using the desired scoring ruberic. K-shot prompting was used and either 0, 1 or 5 example essays were given. 
+Another approach that was evaluated was using existing API's for OpenAI's GPT-3.5 and GPT-4 models (gpt-3.5-turbo-11-6 and gpt-4-1106-preview). Models were prompted in the following fashion:
+
+* 0-shot: No example essays were given to the model. The model was prompted to evaluate the given essays using the desired scoring ruberic.
+* 1-shot: 1 example essay was given to the model. The model was prompted to evaluate the given essays using the desired scoring ruberic.
+* 5-shot: 5 example essays were given to the model. The model was prompted
 
 **Example 1-shot prompt:**
 
 Score the following essay in these categories: cohesion, syntax, vocabulary, phraseology, grammar, conventions. Return only a JSON object with category scores between 1.0 and 5.0 is 0.5 increments. Do not include newlines or any other characters. Here is an example essay surrounded by triple backticks followed by scores: \```[Example Essay Here]\``` Score: cohesion: 4.0, syntax: 3.0, vocabulary: 3.5, phraseology: 3.5, grammar: 4.0, conventions: 3.5, . Essay for you to score surrounded by triple backticks: \```[Essay to Score Here]```
 
-:warning: Work in Progress as of 1/10/2024 :hammer:
+### Prompting Results
+
+![Results from GPT Models](GPT-Results.png)
+
+Overall the GPT models struggled to score the essays accurately. The GPT-3.5 models performed reasonable well with 0-shot and 1-shot prompts, however lost performance with 5-shot prompts. This could be due to the overall length of the prompt and losing the relative importance of the scoring ruebric vs the examples.  
+
+The GPT-4 model performed poorly across all prompts. For 0-shot the model consitently scored essays lower than their actual score, and given examples the model improved accuracy but still scored the essays low overall. Further work could be done to improve the prompt, such as giving more information on the level of the students and expectations from the reviewers.
+
+## Conclusion
+
+Overall the DebertaV3 model outperformed the GPT models in scoring the essays, with a RMSE of essays scores of 0.50 vs. 0.66 for the best GPT model. The GPT models overall struggled to score the essays accurately and consistently scored essays lower than their actual score even with example essays fed into the context window. While further prompt engineering may be able to improve the GPT models, fine-tuning of small dedicated models such as DebertaV3 is a more reliable approach for scoring essays.
